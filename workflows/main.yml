@@ -1,0 +1,28 @@
+name: Run app.py
+
+on:
+  workflow_dispatch: # Allows manual triggering of this workflow
+  push:              # Optionally run on every push to the repository
+    branches:
+      - main
+
+jobs:
+  run-script:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.x' # Replace with your Python version
+
+      - name: Install dependencies
+        run: |
+          pip install --upgrade pip
+          pip install -r requirements.txt
+
+      - name: Run app.py
+        run: python app.py
